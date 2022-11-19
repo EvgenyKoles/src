@@ -105,7 +105,7 @@ func main() {
 
 	pool.Exec(ExampleTask("is"))
 
-	pool.Close()
+	pool.Close()//for commit
 
 	pool.Wait()
 }
