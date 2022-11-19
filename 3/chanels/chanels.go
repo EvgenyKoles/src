@@ -69,3 +69,4 @@ func process(input <-chan int) (res int) {
 //   fmt.Println(<-dataChannel)
 //   fmt.Println(<-dataChannel)
 //   fmt.Println(<-dataChannel)
+				

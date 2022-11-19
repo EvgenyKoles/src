@@ -75,6 +75,7 @@ func (p *Pool) Resize(n int) {
 func (p *Pool) Close() { // закроем канал задач и в 45 строке не ОК
 	close(p.tasks)
 }
+
 func (p *Pool) Wait() { // ждем завершение
 	p.wg.Wait()
 }
