@@ -21,8 +21,7 @@ func main() {
 			conn.Close()
 			continue
 		}
-
-		fmt.Println("Connected")//успешно соединились
+		fmt.Println("Connected")//успешно соединилисj
 
 		// создаём Reader для чтения информации из сокета
 		// далее читаем
