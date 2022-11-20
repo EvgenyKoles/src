@@ -8,7 +8,8 @@ import (
 
 func main() {
 	// Bind на порт ОС
-	listener, _ := net.Listen("tcp", ":5000")
+	listener, _ := net.Listen("tcp", ":5000")// открываем сокет, сюда сваливаются соединения, 
+	//мы должны взять их из очереди
 	
 
 	for {
@@ -21,24 +22,28 @@ func main() {
 			continue
 		}
 
-		fmt.Println("Connected")
+		fmt.Println("Connected")//успешно соединились
 
 		// создаём Reader для чтения информации из сокета
-		bufReader := bufio.NewReader(conn)
+		// далее читаем
+		bufReader := bufio.NewReader(conn) 
 		fmt.Println("Start reading")
 
-			//defer conn.Close()
+		//выносим чтение в одтельный поток. при запуске второго телнета не принимает сообщения
+		go func (c net.Conn) {
+			defer conn.Close()
 
 		for {
 			// побайтово читаем
 			rbyte, err := bufReader.ReadByte()
 
 			if err != nil {
-				fmt.Println("Can not read!", err)
+				fmt.Println("Can not read!", err) // если не смогли прочитать
 				break
-			}
+				}
 			
 			fmt.Print(string(rbyte))
-		}
+			}
+		} (conn) // передаем куфвук в функцию
 	}
 }
