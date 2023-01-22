@@ -21,8 +21,7 @@ func main() {
 			conn.Close()
 			continue
 		}
-
-		fmt.Println("Connected")//успешно соединились
+		fmt.Println("Connected")//успешно соединилисj
 
 		// создаём Reader для чтения информации из сокета
 		// далее читаем
@@ -44,6 +43,6 @@ func main() {
 			
 			fmt.Print(string(rbyte))
 			}
-		} (conn) // передаем куфвук в функцию
+		} (conn) // передаем коннект в функцию
 	}
 }

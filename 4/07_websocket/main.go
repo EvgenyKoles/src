@@ -91,7 +91,6 @@ func getJoke() []byte {
 
 	return []byte(joke.Value.Joke)
 }
-
 func main() {
 
 	bus := NewBus()

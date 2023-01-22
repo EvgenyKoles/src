@@ -21,7 +21,7 @@ func main() {
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		defer r.Body.Close()
 
-		c := http.Client{}
+		c := http.Client{} // создаем клиент он делает запро на апи который возвращает какой то json
 		resp, err := c.Get("http://api.icndb.com/jokes/random?limitTo=[nerdy]")
 		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
@@ -37,7 +37,7 @@ func main() {
 			log.Fatal(err)
 		}
 
-		w.Write([]byte(joke.Value.Joke))
+		w.Write([]byte(joke.Value.Joke)) // вывели ответ в браузере
 	})
 
 	http.ListenAndServe(":8081", nil)

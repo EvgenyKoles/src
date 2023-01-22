@@ -11,7 +11,9 @@ func main() {
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		path := r.URL.Path
 
-		// Создаем http клиент. В стуктуру можно передать таймаут, куки и прочую инфу о запросе
+		// Создаем http клиент. 
+		//В стуктуру можно передать таймаут, куки и прочую инфу о запросе
+		
 		c := http.Client{} //передаем сюда заголовки куки и тд. ходим сюда за инфой
 
 		resp, err := c.Get("http://artii.herokuapp.com/make?text=" + path)
@@ -30,3 +32,4 @@ func main() {
 
 	http.ListenAndServe(":8081", nil)
 }
+
