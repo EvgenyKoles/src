@@ -3,33 +3,37 @@ package main
 import "fmt"
 
 func main() {
-	var z interface{}
 
-	fmt.Printf("%v %v\n", z, z == nil)
 
-	if f := getNil(10); f != nil {
-		fmt.Println("i'm not nill")
-	}
+// a := "sklsfkksflsf"
+// b := "sadfkkasjfkjfaks"
+// fmt.Println(a, b)
 
-	if f := getTrueNil(); f == nil {
-		fmt.Println("but i actually am nil")
-	}
-}
 
-type myError string
+// var name string //console scan
+// var age int
+// var name2 string
+// fmt.Print("Inter your name: ")
+// fmt.Scan(&name, &name2)
+// fmt.Print("Inter your age: ")
+// fmt.Scan(&age)
+// fmt.Print(name,name2, age)
 
-func (m myError) Error() string {
-	return string(m)
-}
 
-func getNil(input interface{}) error {
-	var m *myError
-	if _, ok := input.(int); ok {
-		return m
-	}
-	return nil
-}
+// var a string
+// fmt.Scan(&a)
+// fmt.Println(string(a[len(a)-2]))
 
-func getTrueNil() error {
-	return nil
+
+var a int
+var h int
+var m int
+fmt.Scan(&a)
+
+h = a/30
+m = (a%30)*2
+
+fmt.Print("It is ", h, " hours ", m, " minutes.")
+
+
 }
