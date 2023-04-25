@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+
+)
 
 func main() {
 
@@ -35,16 +38,45 @@ func main() {
 	// // b = b + a
 	// fmt.Println(a)
 
-
-	d := 8 != 5
-
-
+	var v int
+	fmt.Scan(&v)
 
 
+	// c := ((a/100))
+	// d :=((a/10)%10)
+	// b := (a%10)
+
+	// fmt.Println(c)
+	// fmt.Println(d)
+	// fmt.Println(b)
+
+// conveert word to slice of numbers
+// "strings"
+// "strconv"
+	// strs := make([]string, 6)
+	// strs = strings.Split(v, "")
+	// ints := make([]int,0,6)
+
+	// for _, s := range strs {
+	//  num, err := strconv.Atoi(s); 
+	// 	if err == nil {
+	// 		ints = append(ints, num)
+	// }
+	// }
+	// a := ints[0]+ints[1]+ints[2]
+	// b := ints[3]+ints[4]+ints[5]
+	// if a==b {
+	// fmt.Println("YES")	
+	// } else {
+	// 	fmt.Print("NO")
+	// }
+
+// 	var n int
+// // считываем числа пока не будет введен 0
+// for fmt.Scan(&n); n != 0; fmt.Scan(&n){
+// 	fmt.Println(n)
+// }
 
 
 
-
-
-	fmt.Println(d)
 }
