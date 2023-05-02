@@ -281,7 +281,60 @@ func main() {
 	// 	return level == startingLevel
 	// }
 
-	
+
+	//---------------------------------------------
+	// d :=((a/10)%10)
+	// b := (a%10)
+
+	// fmt.Println(c)
+	// fmt.Println(d)
+	// fmt.Println(b)
+
+// conveert word to slice of numbers
+// "strings"
+// "strconv"
+	// strs := make([]string, 6)
+	// strs = strings.Split(v, "")
+	// ints := make([]int,0,6)
+
+	// for _, s := range strs {
+	//  num, err := strconv.Atoi(s); 
+	// 	if err == nil {
+	// 		ints = append(ints, num)
+	// }
+	// }
+	// a := ints[0]+ints[1]+ints[2]
+	// b := ints[3]+ints[4]+ints[5]
+	// if a==b {
+	// fmt.Println("YES")	
+	// } else {
+	// 	fmt.Print("NO")
+	// }
+
+// 	var n int
+// // считываем числа пока не будет введен 0
+// for fmt.Scan(&n); n != 0; fmt.Scan(&n){
+// 	fmt.Println(n)
+// }	
+
+//-------------------------------------------
+
+// func minimumFromFour() int {
+// 	var a,b,c,d,min int
+//  fmt.Scan(&a,&b,&c,&d)
+
+//  if min <= a && a <b && a<c && a <d {
+//  return a	
+//  } else if min <= b && b <a && b<c && b < d{
+// 	 return b
+//  }else if min <= c && c <b && c<a && c < d{
+// 	 return c
+//  }else {
+// 	 return d
+//  }
+// }
+
+
 
 
 	
