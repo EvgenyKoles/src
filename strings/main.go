@@ -126,9 +126,6 @@ func main() {
 		fmt.Print("Ok")
 	}
 
-	
-
-
 
 }
 	func checkAlphabet (t string) bool {
