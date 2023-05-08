@@ -1,35 +1,24 @@
 package main
 
-import "fmt"
+import (
+	"bufio"
+	"fmt"
+	"os"
+	//"strings"
+	"unicode"
+	
+)
 
 func main() {
-	var z interface{}
 
-	fmt.Printf("%v %v\n", z, z == nil)
+	text, _ := bufio.NewReader(os.Stdin).ReadString('\n')
 
-	if f := getNil(10); f != nil {
-		fmt.Println("i'm not nill")
-	}
+	rs := []rune(text)
+	
 
-	if f := getTrueNil(); f == nil {
-		fmt.Println("but i actually am nil")
-	}
-}
+	fmt.Print(rs)
 
-type myError string
 
-func (m myError) Error() string {
-	return string(m)
-}
 
-func getNil(input interface{}) error {
-	var m *myError
-	if _, ok := input.(int); ok {
-		return m
-	}
-	return nil
-}
 
-func getTrueNil() error {
-	return nil
 }
