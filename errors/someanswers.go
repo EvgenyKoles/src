@@ -37,7 +37,7 @@ func main() {
 	
 -------------------------------------------------------------
 
- conveert word to slice of numbers
+ //convert word to slice of numbers
 // "strings"
 // "strconv"
 	// strs := make([]string, 6)
