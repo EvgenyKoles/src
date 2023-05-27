@@ -961,6 +961,7 @@ import (
 func main() {
     fmt.Println(fmt.Sprint(20.19)) // Краткая форма
 
+	
     a := 20.20
     fmt.Println(fmt.Sprintf("%f", a)) // Полная форма
 }
