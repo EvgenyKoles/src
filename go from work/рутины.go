@@ -917,8 +917,10 @@ go func(i int) {...
 
 
 ----------------------
+
 	задачка
-Необходимо написать функцию func merge2Channels(fn func(int) int, in1 <-chan int, in2 <- chan int, out chan<- int, n int).
+Необходимо написать функцию func merge2Channels(fn func(int) int, in1 <-chan int, 
+in2 <- chan int, out chan<- int, n int).
 Описание ее работы:
 n раз сделать следующее
 прочитать по одному числу из каждого из двух каналов in1 и in2, назовем их x1 и x2.
