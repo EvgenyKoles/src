@@ -1,3 +1,7 @@
+
+
+
+// футбольный турнир
 package main
 
 import (
@@ -125,3 +129,6 @@ func (r *rating) print() {
 	sort.Strings(parts)
 	fmt.Println(strings.Join(parts, " "))
 }
+
+
+//-------------------------------------
