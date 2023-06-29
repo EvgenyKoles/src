@@ -3,125 +3,87 @@ package main
 import (
 	"bufio"
 	"fmt"
-	"io"
 	"log"
 	"os"
-	"sort"
-	"strings"
+	"strconv"
 )
 
-// result представляет результат матча
-type result byte
+type element interface{}
 
-// возможные результаты матча
-const (
-	win  result = 'W'
-	draw result = 'D'
-	loss result = 'L'
-)
+type weightFunc func(element) int
 
-// team представляет команду
-type team byte
-
-// match представляет матч
-// например, строке BAW соответствует
-// first=B, second=A, result=W
-type match struct {
-	first  team
-	second team
-	result result
+type iterator interface {
+	next() bool
+	val() element
+	
 }
 
-// rating представляет турнирный рейтинг команд -
-// количество набранных очков по каждой команде
-type rating map[team]int
+type intIterator struct {
+	numbers []int
+	position int
+}
 
-// tournament представляет турнир
-type tournament []match //содержит слайс матчей
+type ints struct {
+	
+}
 
-// calcRating считает и возвращает рейтинг турнира
-func (trn *tournament) calcRating() rating {
-
-	m := rating{}
-	for _, value := range *trn {
-		switch value.result {
-
-		case win :
-			m[value.first] += 3
-			m[value.first] += 0
-		
-		case loss:
-			m[value.first] += 0
-			m[value.second] += 3
-		
-		case draw:
-			m[value.first] += 1
-			m[value.second] += 1
+func (r intIterator) next() bool {
+	for _, v := range r.numbers {
+		if v == 0 {
+			return	false 
 		}
 	}
-	
-	return m
-	
+	return true
+}
+func (r intIterator) val() element {
+    return r.numbers[r.position]
+}
+
+func newIntIterator(src []int) *intIterator {
+	return &intIterator{src, 0}
 }
 
 // ┌─────────────────────────────────┐
 // │ не меняйте код ниже этой строки │
 // └─────────────────────────────────┘
 
-// код, который парсит результаты игр, уже реализован
-// код, который печатает рейтинг, уже реализован
-// ваша задача - реализовать недостающие структуры и методы выше
+// main находит максимальное число из переданных на вход программы.
 func main() {
-	src := readString()
-	trn := parseTournament(src)
-	fmt.Println(trn)
-	rt := trn.calcRating()
-	rt.print()
-}
-
-// readString считывает и возвращает строку из os.Stdin
-func readString() string {
-	rdr := bufio.NewReader(os.Stdin)
-	str, err := rdr.ReadString('\n')
-	if err != nil && err != io.EOF {
-		log.Fatal(err)
+	nums := readInput()
+	fmt.Println("1")
+	it := newIntIterator(nums) //есть итератор, созданный newIntIterator
+	weight := func(el element) int { //принимает элемент последовательности, возврщ число
+		return el.(int)
 	}
-	return str
+	m := max(it, weight)
+	fmt.Println(m)
 }
 
-// parseTournament парсит турнир из исходной строки
-func parseTournament(s string) tournament {
-	descriptions := strings.Split(s, " ") // делим большую строку
-	trn := tournament{}                   //создаем турнир
-	for _, descr := range descriptions {  // пробегаемся по слайсу разделенной строки
-		m := parseMatch(descr) // парсим каждые три буквы
-		trn.addMatch(m)        // добавляем матч к турниру
+// max возвращает максимальный элемент в последовательности.
+// Для сравнения элементов используется вес, который возвращает
+// функция weight.
+func max(it iterator, weight weightFunc) element {
+	var maxEl element
+	for it.next() {
+		curr := it.val()
+		if maxEl == nil || weight(curr) > weight(maxEl) {
+			maxEl = curr
+		}
 	}
-	return trn
+	return maxEl
 }
 
-// parseMatch парсит матч из фрагмента исходной строки
-func parseMatch(s string) match {
-	return match{
-		first:  team(s[0]),
-		second: team(s[1]),
-		result: result(s[2]),
+// readInput считывает последовательность целых чисел из os.Stdin.
+func readInput() []int {
+	var nums []int
+	scanner := bufio.NewScanner(os.Stdin)
+	scanner.Split(bufio.ScanWords)
+	for scanner.Scan() {
+		num, err := strconv.Atoi(scanner.Text())
+		if err != nil {
+			log.Fatal(err)
+		}
+		nums = append(nums, num)
 	}
-}
-
-// addMatch добавляет матч к турниру
-func (t *tournament) addMatch(m match) {
-	*t = append(*t, m)
-}
-
-// print печатает результаты турнира
-// в формате Aw Bx Cy Dz
-func (r *rating) print() {
-	var parts []string
-	for team, score := range *r {
-		part := fmt.Sprintf("%c%d", team, score)
-		parts = append(parts, part)
-	}
-	sort.Strings(parts)
-	fmt.Println(strings.Join(parts, " "))
+	return nums
 }
