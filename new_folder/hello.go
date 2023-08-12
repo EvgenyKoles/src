@@ -39,20 +39,17 @@ func (kat cat) breathe() {
     fmt.Println("Cat breathe")
 }
 func (kat cat) speak(){
-    fmt.Println("Cat speak")
+    fmt.Println("Cat speak", kat.name)
 }
 
 func main() {
     
-    var k animal
-    var a animal
-    a = lion{age: 10}
-    k = cat{age: 10, name: "Katya"}
+    // var k animal
+    // var a animal
+    a := lion{age: 10}
+    k := cat{age: 10, name: "Katya"}
     
-    a.breathe()
-    a.walk()
-	a.speak()
-    k.breathe()
-    k.speak()
-    k.walk()
+    animal.breathe(a)
+    animal.speak(k)
+    animal.walk(k)
 }
