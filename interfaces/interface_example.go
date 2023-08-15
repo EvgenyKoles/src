@@ -26,8 +26,10 @@ func (m lion)speak() {
 }
 type dog struct{
     noize string
-
 }
+
+
+
 type cat struct{
 	age int
     name string
@@ -52,4 +54,6 @@ func main() {
     animal.breathe(a)
     animal.speak(k)
     animal.walk(k)
+
+    
 }
