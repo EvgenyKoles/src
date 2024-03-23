@@ -96,7 +96,7 @@ func wordGenerator(phrase string) nextFunc {
 
 func main() {
 
-	phrase := "one two1 three four1"
+	phrase := "one two three four"
 	next := wordGenerator(phrase)
 	stats := countDigitsInWords(next)
 	printStats(stats)
