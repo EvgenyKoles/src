@@ -36,7 +36,6 @@ func countDigitsInWords(next nextFunc) counter {
      
 		for {
 		word := next()
-		
            	if word == "" {
 			close(pending) // как только кончаются слова на след горутину
 			return
