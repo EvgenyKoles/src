@@ -3,35 +3,42 @@ package main
 import (
 	//"errors"
 	"fmt"
-	"sort"
-	//"math"
+	//"sort"
+	//"net"
+	//"sort"
 )
 
-	func main() {
-		
+func main() {
 
-	nums1 := []int{0}
-	m := 0
-	nums2 := []int{1} 
-	//n := 1
+	nums := []int{3,2,6,5,0,3}
 
+	//maxProfit(nums)
 
-	
-	
+	fmt.Print(maxProfit(nums))
 
-	if m == 0{
-		copy(nums1,nums2)
+}
+
+func maxProfit(prices []int) int {
+    
+	max := 0
+	min := prices[0]
+	k := 0
+
+	for i := 0; i < len(prices); i++ {
+
+		if min > prices[i] && i < len(prices)-1{
+			min = prices[i]
+			max = prices[i]
+		}
+		if max < prices[i]{
+			max = prices[i]
+
+			if max - min > k {
+				k = max - min
+			}
+		}
+		//fmt.Println("max = ", max, " min = ", min, "k= ", k)
 	}
-
-	nums_part := nums1[:m]
-
-    merged := append(nums_part,nums2... )	
-	sort.Ints(merged)
-
-	copy(nums1,merged)
-
-	fmt.Print(nums1)
-
-		
 	
+	return k
 }
