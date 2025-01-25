@@ -2,6 +2,7 @@ package main
 
 import (
 	//"errors"
+	//"crypto/subtle"
 	"fmt"
 	//"sort"
 	//"net"
@@ -10,35 +11,31 @@ import (
 
 func main() {
 
-	nums := []int{3,2,6,5,0,3}
+	nums := []int{7,1,5,3,6,4}
 
 	//maxProfit(nums)
 
 	fmt.Print(maxProfit(nums))
-
+	
 }
+
+
+
 
 func maxProfit(prices []int) int {
     
-	max := 0
-	min := prices[0]
-	k := 0
 
-	for i := 0; i < len(prices); i++ {
 
-		if min > prices[i] && i < len(prices)-1{
-			min = prices[i]
-			max = prices[i]
+	sum := 0
+
+	for i := 0; i < len(prices)-1; i++ {
+
+		if prices[i] < prices[i+1] {
+			
+			sum += prices[i+1] - prices[i]
 		}
-		if max < prices[i]{
-			max = prices[i]
 
-			if max - min > k {
-				k = max - min
-			}
-		}
-		//fmt.Println("max = ", max, " min = ", min, "k= ", k)
 	}
 	
-	return k
-}
+	return sum
+} 
