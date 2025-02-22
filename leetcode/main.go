@@ -6,50 +6,45 @@ import (
 
 func main() {
 
-	nums := []int{1,1,1,0}
-	
-	//nums := []int{1,1,1,0}
-	//maxProfit(nums)
-
-	fmt.Print(canJump(nums))
-	
+	nums := []int{1,1,1,2,1}
+	fmt.Println(jump(nums))
+	//fmt.Print(len(nums))
 }
-
-
-
-
-func canJump(nums []int) bool {
-	max :=0
-	k := len(nums)-1;
-	
-	// if len(nums)-1 == 0{
-	// 	return true
-	// }
-	// if nums[0] == 1 && nums[1]==0{
-	// 	return true
-	// }
-	// if nums[0] == 0 {
-	// 	return false
-	// }
-	
-	for i:= 0; i < len(nums); i++ {
-		if nums[i]> max{
-			max = nums[i]+1
-		}
-		fmt.Println("k= ", k, ",nums[i] = ", nums[i], "max = ", max, "i= ", i)
-		if nums[i] >= k {
-			return true
-		}
-		
-		if nums[i] == 0 && (nums[i-1]==1 || nums[i-1]==0) && max < 2{
-			return false
-		}
-		if max == 0 && nums[i] == 0{
-			return false
-		}
-		k--
-		max--
-	}
+//берешь максимум из первых nums[i], тут первых четырех
+func jump(nums []int) int {
+    // Если в массиве 1 элемент, мы уже на последнем индексе — прыжков не нужно
+    if len(nums) <= 1 {
+        return 0
+    }
     
-	return false
+    // Счётчик прыжков
+    jumps := 0
+    // Текущий «конец» отрезка, до которого мы можем дойти с помощью уже совершенного прыжка
+    currentEnd := 0
+    // Самая дальняя позиция, которую мы можем достичь на шаге (учитывая все варианты из текущего отрезка)
+    furthest := 0
+
+    // Идём до предпоследнего индекса (len(nums)-1), т.к. важно понять, 
+    // сколько прыжков нужно, чтобы добраться ДО последнего
+    for i := 0; i < len(nums)-1; i++ {
+        // Обновляем самую дальнюю достижимую позицию
+        if i+nums[i] > furthest {
+            furthest = i + nums[i]
+        }
+        
+        // Если мы дошли до конца текущего «окна» (currentEnd),
+        // значит, пора совершать очередной прыжок
+        if i == currentEnd {
+            jumps++
+            currentEnd = furthest
+        }
+        
+        // Как только currentEnd достигнет или превзойдёт последний индекс,
+        // можно считать, что прыжок нас уже "дотянет" до конца
+        if currentEnd >= len(nums)-1 {
+            break
+        }
+    }
+    
+    return jumps
 }
