@@ -3,38 +3,29 @@ package main
 import (
 	
 	"fmt"
-	"slices"
+	//"slices"
 	//"sort"
 )
 
 func main() {
 
-	nums := []int{3,0,6,1,5}
-	fmt.Println(hIndex(nums))
-	//fmt.Print(len(nums))
+	nums := []int{1,2,3,4}
+	fmt.Println(productExceptSelf(nums))
+   // fmt.Print(len(nums))
 }
 
-func hIndex(citations []int) int {
-    
-    slices.Sort(citations)
-    fmt.Print(citations)
-    h := len(citations)
-  
-    fmt.Println(" ")
-    for i := range citations {
-        
-    
-        if citations[i] <= len(citations) - (i) {
-            h = citations[i]
-            
-            
-        }else if h < len(citations) - (i){
-            h = len(citations) - (i)
-        }
+func productExceptSelf(nums []int) []int {
 
+    ans := []int{}
+    m := nums[0]
 
-        fmt.Println("h = ",h , "len - i = " ,len(citations) - (i))
+    for i := len(nums)-1; i >= 0; i-- {
+
+        m = nums[i] * m
+        ans = append(ans, m)
+        fmt.Println("m = ", m, "  ","nums[i]= ", nums[i])
     }
-
-    return h
+    
+    return ans
+    
 }
