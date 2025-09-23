@@ -14,7 +14,7 @@ import (
 	"unsafe"
 )
 
-// -------------------- Payload & metrics --------------------
+//  Payload & metrics 
 
 type payload struct{ t time.Time }
 
@@ -45,14 +45,14 @@ func computeQs(ds []time.Duration) quantiles {
 	return quantiles{at(0.50), at(0.95), at(0.99), at(0.999)}
 }
 
-// -------------------- Queue interface --------------------
+//  Queue 
 
 type Queue interface {
 	Enq(v any) bool
 	Deq() (any, bool)
 }
 
-// -------------------- Step 1: Mutex queue --------------------
+//  Step 1: Mutex queue 
 
 type MutexQ struct {
 	mu sync.Mutex
@@ -80,7 +80,7 @@ func (q *MutexQ) Deq() (any, bool) {
 	return v, true
 }
 
-// -------------------- Step 2+: Lock-free MSQueue --------------------
+//  Step 2: Lock-free MSQueue 
 
 type node struct {
 	val  any
@@ -158,7 +158,7 @@ func (q *MSQueue) Deq() (any, bool) {
 	}
 }
 
-// -------------------- Step 3: EBR-inspired pooling --------------------
+//  Step 3: EBR-inspired pooling 
 // Пул узлов уменьшает аллокации/GC-паузы: концептуально похоже на batch free в EBR.
 
 const shards = 64
@@ -204,8 +204,7 @@ func putNode(n *node, pooling bool) {
 }
 
 func retire(n *node, pooling bool) { putNode(n, pooling) }
-
-// -------------------- Step 5: Adaptive backoff --------------------
+//  Step 5: Adaptive backoff 
 
 func adaptiveBackoff(fails int) {
 	if fails < 4 {
@@ -225,7 +224,7 @@ func spin(iters int) {
 	}
 }
 
-// -------------------- Open-loop (CO-safe) driver --------------------
+//  Open-loop (CO-safe) driver 
 
 func runBenchmark(step int, rate int, duration time.Duration, producers, consumers int, burst float64, nogc bool) {
 	if nogc {
@@ -363,7 +362,7 @@ func runBenchmark(step int, rate int, duration time.Duration, producers, consume
 	}
 }
 
-// -------------------- main --------------------
+//  main
 
 func main() {
 	var (
@@ -381,7 +380,6 @@ func main() {
 	runBenchmark(*step, *rate, *duration, *producers, *consumers, *burst, *nogc)
 }
 
-// helpers
 func max(a, b int) int {
 	if a > b {
 		return a
